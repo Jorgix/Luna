@@ -11,7 +11,7 @@ define("CONF_DB_NAME", "fsphp");
  * PROJECT URLs
  */
 define("CONF_URL_BASE", "https://www.cafecontrol.com.br");
-define("CONF_URL_TEST", "http://www.localhost/php");
+define("CONF_URL_TEST", "http://www.localhost/luna");
 define("CONF_URL_ADMIN", "/admin");
 
 /**
