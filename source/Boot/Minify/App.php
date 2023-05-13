@@ -26,7 +26,11 @@ if (strpos(url(), "localhost")) {
     $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.min.js");
     $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.form.js");
     $minJS->add(__DIR__ . "/../../../shared/scripts/jquery-ui.js");
+    $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.mask.js");
+    $minJS->add(__DIR__ . "/../../../shared/scripts/highcharts.js");
     $minJS->add(__DIR__ . "/../../../shared/scripts/tracker.js");
+
+    
 
     //theme CSS
     $jsDir = scandir(__DIR__ . "/../../../themes/" . CONF_VIEW_APP . "/assets/js");
