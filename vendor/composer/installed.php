@@ -3,7 +3,7 @@
         'name' => 'upinside/fsphp',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2eaccf33959143fa1715b3c7932cd54605dbd0b8',
+        'reference' => '70b0f420c3fe115f0786c739168aa9658b689f74',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -112,7 +112,7 @@
         'upinside/fsphp' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2eaccf33959143fa1715b3c7932cd54605dbd0b8',
+            'reference' => '70b0f420c3fe115f0786c739168aa9658b689f74',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
