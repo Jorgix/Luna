@@ -2,11 +2,12 @@
 
 namespace Source\App;
 
-use Source\Models\Auth;
 use Source\Core\Controller;
-use Source\Support\Message;
+use Source\Models\Auth;
 use Source\Models\Report\Access;
 use Source\Models\Report\Online;
+use Source\Models\User;
+use Source\Support\Message;
 
 /**
  * Class App
@@ -14,7 +15,7 @@ use Source\Models\Report\Online;
  */
 class App extends Controller
 {
-    /** @var */
+    /** @var User */
     private $user;
 
     /**
@@ -38,7 +39,89 @@ class App extends Controller
      */
     public function home()
     {
-        echo $this->view->render("home", []);
+        $head = $this->seo->render(
+            "Olá {$this->user->first_name}. Vamos controlar? - " . CONF_SITE_NAME,
+            CONF_SITE_DESC,
+            url(),
+            theme("/assets/images/share.jpg"),
+            false
+        );
+
+        echo $this->view->render("home", [
+            "head" => $head
+        ]);
+    }
+
+    /**
+     * APP INCOME (Receber)
+     */
+    public function income()
+    {
+        $head = $this->seo->render(
+            "Minhas receitas - " . CONF_SITE_NAME,
+            CONF_SITE_DESC,
+            url(),
+            theme("/assets/images/share.jpg"),
+            false
+        );
+
+        echo $this->view->render("income", [
+            "head" => $head
+        ]);
+    }
+
+    /**
+     * APP EXPENSE (Pagar)
+     */
+    public function expense()
+    {
+        $head = $this->seo->render(
+            "Minhas despesas - " . CONF_SITE_NAME,
+            CONF_SITE_DESC,
+            url(),
+            theme("/assets/images/share.jpg"),
+            false
+        );
+
+        echo $this->view->render("expense", [
+            "head" => $head
+        ]);
+    }
+
+    /**
+     * APP INVOICE (Fatura)
+     */
+    public function invoice()
+    {
+        $head = $this->seo->render(
+            "Aluguel - " . CONF_SITE_NAME,
+            CONF_SITE_DESC,
+            url(),
+            theme("/assets/images/share.jpg"),
+            false
+        );
+
+        echo $this->view->render("invoice", [
+            "head" => $head
+        ]);
+    }
+
+    /**
+     * APP PROFILE (Perfil)
+     */
+    public function profile()
+    {
+        $head = $this->seo->render(
+            "Meu perfil - " . CONF_SITE_NAME,
+            CONF_SITE_DESC,
+            url(),
+            theme("/assets/images/share.jpg"),
+            false
+        );
+
+        echo $this->view->render("profile", [
+            "head" => $head
+        ]);
     }
 
     /**
