@@ -18,11 +18,4 @@ class Channel extends Model
         parent::__construct("faq_channels", ["id"], ["channel", "description"]);
     }
 
-    /**
-     * @return bool
-     */
-    public function save(): bool
-    {
-
-    }
 }
