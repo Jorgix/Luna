@@ -73,7 +73,7 @@
                 <h2 class="icon-graduation-cap">Aprenda:</h2>
             </header>
             <div class="app_widget_content">
-                <?php if (!empty($post)) : ?>
+                <?php if (!empty($posts)) : ?>
                     <?php foreach ($posts as $post) : ?>
                         <article class="app_widget_blog_article">
                             <div class="thumb">
