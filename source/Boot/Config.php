@@ -5,7 +5,7 @@
 define("CONF_DB_HOST", "localhost");
 define("CONF_DB_USER", "root");
 define("CONF_DB_PASS", "12345");
-define("CONF_DB_NAME", "fsphp");
+define("CONF_DB_NAME", "stackphp");
 
 /**
  * PROJECT URLs
