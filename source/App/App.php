@@ -238,23 +238,22 @@ class App extends Controller
             return;
         }
 
-        // if(request_limit("appsupport", 3, 60 * 5)){
-        //     $json["message"] = $this->message->warning("Por favor, aguarde 5 minutos para enviar novos contatos, sugestões ou reclamações")->render();
-        //     echo json_encode($json);
-        //     return;
-        // }
+        if(request_limit("appsupport", 3, 60 * 5)){
+            $json["message"] = $this->message->warning("Por favor, aguarde 5 minutos para enviar novos contatos, sugestões ou reclamações")->render();
+            echo json_encode($json);
+            return;
+        }
 
-        // if(request_repeat("support", $data["message"])){
-        //     $json["message"] = $this->message->warning("Já recebemos sua solicitação {$this->user->first_name}. Agradecemos pelo contato e retornaremos em breve")->render();
-        //     echo json_encode($json);
-        //     return;
-        // }
+        if(request_repeat("support", $data["message"])){
+            $json["message"] = $this->message->warning("Já recebemos sua solicitação {$this->user->first_name}. Agradecemos pelo contato e retornaremos em breve")->render();
+            echo json_encode($json);
+            return;
+        }
 
         $subject = date_fmt() . "- {$data["subject"]}";
 
         $message = filter_var($data["message"], FILTER_SANITIZE_STRING);
-        $view = new View( __DIR__ . "../../shared/views/email");
-
+        $view = new View(__DIR__ . "/../../shared/views/email");
         $body = $view->render("mail", [
             "subject" => $subject,
             "message" => str_textarea($message),
