@@ -85,6 +85,17 @@ function str_title(string $string): string
 }
 
 /**
+ * @param string $text
+ * @return string
+ */
+function str_textarea(string $text): string
+{
+    $text = filter_var($text, FILTER_SANITIZE_STRIPPED);
+    $arrayReplace = ["&#10;", "&#10;&#10;", "&#10;&#10;&#10;", "&#10;&#10;&#10;&#10;", "&#10;&#10;&#10;&#10;&#10;"];
+    return "<p>" . str_replace($arrayReplace, "</p><p>", $text) . "</p>";
+}
+
+/**
  * @param string $string
  * @param int $limit
  * @param string $pointer
@@ -122,6 +133,15 @@ function str_limit_chars(string $string, int $limit, string $pointer = "..."): s
 }
 
 /**
+ * @param string $price
+ * @return string
+ */
+function str_price(string $price): string
+{
+    return number_format($price, 2, ",", ".");
+}
+
+/**
  * ###############
  * ###   URL   ###
  * ###############
@@ -133,7 +153,7 @@ function str_limit_chars(string $string, int $limit, string $pointer = "..."): s
  */
 function url(string $path = null): string
 {
-    if ($_SERVER['HTTP_HOST']) {
+    if (strpos($_SERVER['HTTP_HOST'], "localhost")) {
         if ($path) {
             return CONF_URL_TEST . "/" . ($path[0] == "/" ? mb_substr($path, 1) : $path);
         }
@@ -180,24 +200,42 @@ function redirect(string $url): void
  */
 
 /**
+ * @return \Source\Models\User|null
+ */
+function user(): ?\Source\Models\User
+{
+    return \Source\Models\Auth::user();
+}
+
+/**
+ *
+ * @return \Source\Core\Session
+ */
+function session(): \Source\Core\Session
+{
+    return new \Source\Core\Session();
+}
+
+/**
  * @param string|null $path
+ * @param string $theme
  * @return string
  */
-function theme(string $path = null): string
+function theme(string $path = null, string $theme = CONF_VIEW_THEME): string
 {
-    if ($_SERVER['HTTP_HOST']) {
+    if (strpos($_SERVER['HTTP_HOST'], "localhost")) {
         if ($path) {
-            return CONF_URL_TEST . "/themes/" . CONF_VIEW_THEME . "/" . ($path[0] == "/" ? mb_substr($path, 1) : $path);
+            return CONF_URL_TEST . "/themes/{$theme}/" . ($path[0] == "/" ? mb_substr($path, 1) : $path);
         }
 
-        return CONF_URL_TEST . "/themes/" . CONF_VIEW_THEME;
+        return CONF_URL_TEST . "/themes/{$theme}";
     }
 
     if ($path) {
-        return CONF_URL_BASE . "/themes/" . CONF_VIEW_THEME . "/" . ($path[0] == "/" ? mb_substr($path, 1) : $path);
+        return CONF_URL_BASE . "/themes/{$theme}/" . ($path[0] == "/" ? mb_substr($path, 1) : $path);
     }
 
-    return CONF_URL_BASE . "/themes/" . CONF_VIEW_THEME;
+    return CONF_URL_BASE . "/themes/{$theme}";
 }
 
 /**
@@ -221,6 +259,7 @@ function image(string $image, int $width, int $height = null): string
  * @param string $date
  * @param string $format
  * @return string
+ * @throws Exception
  */
 function date_fmt(string $date = "now", string $format = "d/m/Y H\hi"): string
 {
@@ -230,6 +269,7 @@ function date_fmt(string $date = "now", string $format = "d/m/Y H\hi"): string
 /**
  * @param string $date
  * @return string
+ * @throws Exception
  */
 function date_fmt_br(string $date = "now"): string
 {
@@ -239,6 +279,7 @@ function date_fmt_br(string $date = "now"): string
 /**
  * @param string $date
  * @return string
+ * @throws Exception
  */
 function date_fmt_app(string $date = "now"): string
 {
