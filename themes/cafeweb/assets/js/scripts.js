@@ -82,7 +82,7 @@ $(function () {
                 //redirect
                 if (response.redirect) {
                     window.location.href = response.redirect;
-                }else{
+                } else {
                     load.fadeOut(200);
                 }
 
@@ -99,7 +99,6 @@ $(function () {
                 }
             },
             complete: function () {
-
                 if (form.data("reset") === true) {
                     form.trigger("reset");
                 }

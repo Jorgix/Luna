@@ -260,12 +260,10 @@ abstract class Model
      */
     public function save(): bool
     {
-
         if (!$this->required()) {
-            $this->message()->warning("Preencha todos os campos para continuar");
+            $this->message->warning("Preencha todos os campos para continuar");
             return false;
         }
-
 
         /** Update */
         if (!empty($this->id)) {

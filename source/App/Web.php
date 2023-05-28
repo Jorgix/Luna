@@ -223,7 +223,7 @@ class Web extends Controller
      */
     public function login(?array $data): void
     {
-        if(Auth::user()){
+        if (Auth::user()) {
             redirect("/app");
         }
 
@@ -251,6 +251,7 @@ class Web extends Controller
             $login = $auth->login($data['email'], $data['password'], $save);
 
             if ($login) {
+                $this->message->success("Seja bem-vindo(a) de volta " . Auth::user()->first_name . "!")->flash();
                 $json['redirect'] = url("/app");
             } else {
                 $json['message'] = $auth->message()->before("Ooops! ")->render();
@@ -279,10 +280,10 @@ class Web extends Controller
      */
     public function forget(?array $data)
     {
-        if(Auth::user()){
+        if (Auth::user()) {
             redirect("/app");
         }
-        
+
         if (!empty($data['csrf'])) {
             if (!csrf_verify($data)) {
                 $json['message'] = $this->message->error("Erro ao enviar, favor use o formulário")->render();
@@ -331,6 +332,10 @@ class Web extends Controller
      */
     public function reset(array $data): void
     {
+        if (Auth::user()) {
+            redirect("/app");
+        }
+
         if (!empty($data['csrf'])) {
             if (!csrf_verify($data)) {
                 $json['message'] = $this->message->error("Erro ao enviar, favor use o formulário")->render();
@@ -377,6 +382,10 @@ class Web extends Controller
      */
     public function register(?array $data): void
     {
+        if (Auth::user()) {
+            redirect("/app");
+        }
+
         if (!empty($data['csrf'])) {
             if (!csrf_verify($data)) {
                 $json['message'] = $this->message->error("Erro ao enviar, favor use o formulário")->render();

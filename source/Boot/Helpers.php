@@ -44,12 +44,8 @@ function str_slug(string $string): string
     $formats = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿRr"!@#$%&*()_-+={[}]/?;:.,\\\'<>°ºª';
     $replace = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                 ';
 
-    $slug = str_replace(
-        ["-----", "----", "---", "--"],
-        "-",
-        str_replace(
-            " ",
-            "-",
+    $slug = str_replace(["-----", "----", "---", "--"], "-",
+        str_replace(" ", "-",
             trim(strtr(utf8_decode($string), utf8_decode($formats), $replace))
         )
     );
@@ -63,9 +59,7 @@ function str_slug(string $string): string
 function str_studly_case(string $string): string
 {
     $string = str_slug($string);
-    $studlyCase = str_replace(
-        " ",
-        "",
+    $studlyCase = str_replace(" ", "",
         mb_convert_case(str_replace("-", " ", $string), MB_CASE_TITLE)
     );
 
@@ -96,8 +90,8 @@ function str_title(string $string): string
  */
 function str_textarea(string $text): string
 {
-    $text = filter_var($text, FILTER_SANITIZE_STRIPPED); 
-    $arrayReplace = ["&#10;", "&#10;&#10;", "&#10;&#10;&#10;", "&#10;&#10;&#10;&#10;", "&#10;&#10;&#10;&#10;&#10;" ];
+    $text = filter_var($text, FILTER_SANITIZE_STRIPPED);
+    $arrayReplace = ["&#10;", "&#10;&#10;", "&#10;&#10;&#10;", "&#10;&#10;&#10;&#10;", "&#10;&#10;&#10;&#10;&#10;"];
     return "<p>" . str_replace($arrayReplace, "</p><p>", $text) . "</p>";
 }
 
@@ -159,7 +153,7 @@ function str_price(string $price): string
  */
 function url(string $path = null): string
 {
-    if ($_SERVER['HTTP_HOST']) {
+    if (strpos($_SERVER['HTTP_HOST'], "localhost")) {
         if ($path) {
             return CONF_URL_TEST . "/" . ($path[0] == "/" ? mb_substr($path, 1) : $path);
         }
@@ -204,22 +198,32 @@ function redirect(string $url): void
  * ###   ASSETS   ###
  * ##################
  */
- 
- /**
-  * @return Source\Models\User|null
-  */
- function user(): ?\Source\Models\User
- {
+
+/**
+ * @return \Source\Models\User|null
+ */
+function user(): ?\Source\Models\User
+{
     return \Source\Models\Auth::user();
- }
+}
+
+/**
+ *
+ * @return \Source\Core\Session
+ */
+function session(): \Source\Core\Session
+{
+    return new \Source\Core\Session();
+}
 
 /**
  * @param string|null $path
+ * @param string $theme
  * @return string
  */
 function theme(string $path = null, string $theme = CONF_VIEW_THEME): string
 {
-    if ($_SERVER['HTTP_HOST']) {
+    if (strpos($_SERVER['HTTP_HOST'], "localhost")) {
         if ($path) {
             return CONF_URL_TEST . "/themes/{$theme}/" . ($path[0] == "/" ? mb_substr($path, 1) : $path);
         }
@@ -231,7 +235,7 @@ function theme(string $path = null, string $theme = CONF_VIEW_THEME): string
         return CONF_URL_BASE . "/themes/{$theme}/" . ($path[0] == "/" ? mb_substr($path, 1) : $path);
     }
 
-    return CONF_URL_BASE . "/themes/{$theme}" . CONF_VIEW_THEME;
+    return CONF_URL_BASE . "/themes/{$theme}";
 }
 
 /**
@@ -255,6 +259,7 @@ function image(string $image, int $width, int $height = null): string
  * @param string $date
  * @param string $format
  * @return string
+ * @throws Exception
  */
 function date_fmt(string $date = "now", string $format = "d/m/Y H\hi"): string
 {
@@ -264,6 +269,7 @@ function date_fmt(string $date = "now", string $format = "d/m/Y H\hi"): string
 /**
  * @param string $date
  * @return string
+ * @throws Exception
  */
 function date_fmt_br(string $date = "now"): string
 {
@@ -273,6 +279,7 @@ function date_fmt_br(string $date = "now"): string
 /**
  * @param string $date
  * @return string
+ * @throws Exception
  */
 function date_fmt_app(string $date = "now"): string
 {

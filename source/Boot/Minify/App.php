@@ -30,8 +30,6 @@ if (strpos(url(), "localhost")) {
     $minJS->add(__DIR__ . "/../../../shared/scripts/highcharts.js");
     $minJS->add(__DIR__ . "/../../../shared/scripts/tracker.js");
 
-    
-
     //theme CSS
     $jsDir = scandir(__DIR__ . "/../../../themes/" . CONF_VIEW_APP . "/assets/js");
     foreach ($jsDir as $js) {

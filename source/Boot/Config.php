@@ -5,7 +5,7 @@
 define("CONF_DB_HOST", "localhost");
 define("CONF_DB_USER", "root");
 define("CONF_DB_PASS", "12345");
-define("CONF_DB_NAME", "stackphp");
+define("CONF_DB_NAME", "fsphp");
 
 /**
  * PROJECT URLs
@@ -86,9 +86,9 @@ define("CONF_IMAGE_QUALITY", ["jpg" => 75, "png" => 5]);
 define("CONF_MAIL_HOST", "smtp.sendgrid.net");
 define("CONF_MAIL_PORT", "587");
 define("CONF_MAIL_USER", "apikey");
-define("CONF_MAIL_PASS", "***************************");
+define("CONF_MAIL_PASS", "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");
 define("CONF_MAIL_SENDER", ["name" => "Robson V. Leite", "address" => "cursos@upinside.com.br"]);
-define("CONF_MAIL_SUPPORT", "cursos@upinside.com.br");
+define("CONF_MAIL_SUPPORT", "robsonvleite@gmail.com");
 define("CONF_MAIL_OPTION_LANG", "br");
 define("CONF_MAIL_OPTION_HTML", true);
 define("CONF_MAIL_OPTION_AUTH", true);
